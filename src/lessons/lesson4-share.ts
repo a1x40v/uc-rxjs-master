@@ -1,4 +1,4 @@
-import { connectable, interval, multicast, Observer, Subject, tap } from "rxjs";
+import { interval, Observer, share, tap } from "rxjs";
 
 export function lesson4() {
   const observer: Partial<Observer<unknown>> = {
@@ -11,23 +11,13 @@ export function lesson4() {
     tap((value) => console.log("new interval", value))
   );
 
-  /* deprecated */
-  // const multicastedInterval$ = interval$.pipe(multicast(() => new Subject()));
-
-  const multicastedInterval$ = connectable(interval$, {
-    connector: () => new Subject(),
-  });
-
-  const connectedSub = multicastedInterval$.connect();
+  const multicastedInterval$ = interval$.pipe(share());
 
   const subOne = multicastedInterval$.subscribe(observer);
   const subTwo = multicastedInterval$.subscribe(observer);
 
   setTimeout(() => {
-    /*  interval stream won't stop */
-    // subOne.unsubscribe();
-    // subTwo.unsubscribe();
-
-    connectedSub.unsubscribe();
+    subOne.unsubscribe();
+    subTwo.unsubscribe();
   }, 4000);
 }
