@@ -1,0 +1,12 @@
+{
+  "server": {
+    "baseDir": "./",
+    "routes": {
+      "/node_modules": "node_modules"
+    }
+  },
+  "files": ["./src/**/*.{html,js,ts}"],
+  "watchOptions": {
+    "ignored": "node_modules"
+  }
+}
