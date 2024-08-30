@@ -1,11 +1,16 @@
-import { fromEvent } from "rxjs";
-import { map, filter } from "rxjs/operators";
+import { Observer, Subject } from "rxjs";
 
-const click$ = fromEvent<MouseEvent>(document, "click");
+const observer: Partial<Observer<unknown>> = {
+  next: (val) => console.log("next", val),
+  error: (err) => console.log("error", err),
+  complete: () => console.log("complete"),
+};
 
-const position$ = click$.pipe(
-  map((event) => ({ x: event.clientX, y: event.clientY })),
-  filter((position) => position.x > 100)
-);
+const subject = new Subject<unknown>();
 
-position$.subscribe((position) => console.log(position));
+const subscription = subject.subscribe(observer);
+subject.next("Hello");
+
+/*  Doesnt catch the first value "Hello" */
+const subscriptionTwo = subject.subscribe(observer);
+subject.next("World");
