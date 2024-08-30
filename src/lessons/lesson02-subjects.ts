@@ -1,6 +1,6 @@
 import { interval, Observer, Subject, tap } from "rxjs";
 
-export function lesson2() {
+export function lesson02() {
   const observer: Partial<Observer<unknown>> = {
     next: (val) => console.log("next", val),
     error: (err) => console.log("error", err),

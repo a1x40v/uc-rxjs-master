@@ -17,9 +17,9 @@ export default [
     ]
   },
   {
-    input: 'src/lab1/lab1.ts',
+    input: 'src/lab01/lab01.ts',
     output: {
-      file: 'dist/lab1.bundle.js',
+      file: 'dist/lab01.bundle.js',
       format: 'iife',
       name: 'Lab1Bundle',
     },
