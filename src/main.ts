@@ -1,3 +1,3 @@
-import { lesson04 } from "./lessons/lesson04-share";
+import { lesson05 } from "./lessons/lesson05-behaviour-subjects";
 
-lesson04();
+lesson05();
