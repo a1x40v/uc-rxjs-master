@@ -1,4 +1,4 @@
-import { Observer, Subject } from "rxjs";
+import { interval, Observer, tap } from "rxjs";
 
 const observer: Partial<Observer<unknown>> = {
   next: (val) => console.log("next", val),
@@ -6,11 +6,17 @@ const observer: Partial<Observer<unknown>> = {
   complete: () => console.log("complete"),
 };
 
-const subject = new Subject<unknown>();
+const interval$ = interval(2000).pipe(
+  tap((value) => console.log("new interval", value))
+);
 
-const subscription = subject.subscribe(observer);
-subject.next("Hello");
+interval$.subscribe(observer);
+interval$.subscribe(observer);
 
-/*  Doesnt catch the first value "Hello" */
-const subscriptionTwo = subject.subscribe(observer);
-subject.next("World");
+/*
+    Uni-cast behaviour.
+    With Observables each subscriber creates an individual 
+  execution path between the observable and the observer.
+    In the example above each subscription is getting it's own interval,
+  rather than one interval being shared between both.
+*/
