@@ -1,11 +1,13 @@
 {
   "server": {
-    "baseDir": "./",
+    "baseDir": "./public",
     "routes": {
+      "/dist": "dist",
+      "/styles": "styles",
       "/node_modules": "node_modules"
     }
   },
-  "files": ["./src/**/*.{html,js,ts}"],
+  "files": ["./src/**/*.{html,js,ts}", "./public/*.html", "./styles/*.css"],
   "watchOptions": {
     "ignored": "node_modules"
   }
